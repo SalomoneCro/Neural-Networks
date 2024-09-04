@@ -29,11 +29,12 @@ def Runge_Kutta(fun, interval, x_0, h, p, act_fcnt=lambda x,t,p: x):
 
     for _ in range(its - 1):
 
-        F1 = h*fun(p, t_i, x_i)
-        F2 = h*fun(p, t_i + h/2, x_i + F1/2)
-        F3 = h*fun(p, t_i + h/2, x_i + F2/2)
-        F4 = h*fun(p, t_i + h, x_i + F3)
+        F1 = h*fun(x_i, t_i, p)
+        F2 = h*fun(x_i + F1/2, t_i + h/2, p)
+        F3 = h*fun(x_i + F2/2, t_i + h/2, p)
+        F4 = h*fun(x_i + F3, t_i + h, p)
         x_i += (F1 + 2*F2 + 2*F3 + F4)/6
+        x_i = act_fcnt(x_i, t_i, p)
         t_i += h
-        sol.append(act_fcnt(x_i, t_i, p))
+        sol.append(x_i)
     return sol
