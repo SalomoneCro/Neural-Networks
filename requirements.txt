@@ -2,3 +2,7 @@ numpy
 matplotlib
 scipy
 ipywidgets
+torch
+torchvision
+torchaudio 
+torchviz
